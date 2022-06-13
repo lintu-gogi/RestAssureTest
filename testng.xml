@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test thread-count="5" name="Test">
+    <classes>
+      <class name="com.test.simpleCRUDEoperations.GetUserDataTest"/>
+      <class name="com.test.tests.ApiTestScriptsEndToEnd"/>
+      <class name="com.test.simpleCRUDEoperations.DeleteUserDataTest"/>
+      <class name="com.test.simpleCRUDEoperations.UpdateUserDataTest"/>
+      <class name="com.test.simpleCRUDEoperations.LoginToApi"/>
+      <class name="com.test.simpleCRUDEoperations.AddUserDataTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

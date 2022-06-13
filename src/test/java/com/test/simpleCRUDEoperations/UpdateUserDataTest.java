@@ -7,43 +7,51 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.test.constants.Endpoints;
+import com.test.helpers.UserServiceHelper;
+import com.test.models.DeserializeGetUserPogo;
 
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
 
-public class UpdateUserDataTest {
+public class UpdateUserDataTest extends UserServiceHelper{
+	
+	String userId;
+	String id;
 	@BeforeClass
-	public static void init() {
-		RestAssured.baseURI ="https://us-central1-qa01-tekarch-accmanager.cloudfunctions.net";
+	public void loginToApi() {
+		Response res = LoginToApplication();
+		res.then().statusCode(201);
+		System.out.println("Sucessfully logged into the Application");
 	}
-	
-	public static String loginToTekarchApi() {
-		Response response=RestAssured.
-				given().contentType("application/json").
-				body("{\"username\":\"lintu.joseph06@ta.com\",\"password\":\"lintu.joseph06@123\"}").
-				when().log().all().
-				post(Endpoints.LOGIN);
-		String token=response.body().jsonPath().getString("[0].token");
-		System.out.println("token generated is="+token);
-		return token;
+	@Test(priority=2)
+	public void getUsers() {
+		DeserializeGetUserPogo[] obj;
+		obj=getUserData();
+		userId = obj[0].getUserid();
+		id = obj[0].getId();
+		System.out.println("Total no of Records "+obj.length);
+		System.out.println("First User Accont no "+obj[0].getAccountno()+" Department no "
+				+obj[0].getDepartmentno()+" Salary "+obj[0].getSalary()+" Pincode code "+obj[0].getPincode()+
+				"  User id :"+userId+"  Id :"+id);
+		//Storing UserId and Id
+		
+		
 	}
-	
-	@Test(enabled = true)
-	public static void TC_005_updateUserData() throws IOException {
-				
-		Header header = new Header("token",loginToTekarchApi());
-		Response response = RestAssured.given().contentType("application/json").header(header)
-				.body("{\"accountno\":\"TA-1234477\",\"departmentno\":\"7\",\"salary\":\"1700\",\"pincode\":\"111111\",\"userid\":"
-						+ "\"o4FDbZMJElX44kOM78mO\",\"id\":\"WFfm4YPKxbjUdQNmjqKX\"}")
-				.when()
-				.put("/updateData");
-
-		response.then().statusCode(200);
-		String status = response.jsonPath().get("status");
-		System.out.println("UPDATE STATUS="+status);
+	@Test(priority=1)
+	public void CreateUser() {
+		Response res  = addUserData();
+		res.then().statusCode(201);
 		//AssertJUnit.assertEquals(status, "success");
 	}
-
+	@Test(priority=3,enabled=true)
+	public void UpdateUser()
+	{
+		//getUsers();
+		Response res  = updateUserData(userId,id);
+		res.then().statusCode(200);
+		getUsers();
+	}
+	
 
 }

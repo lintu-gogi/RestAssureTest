@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import org.testng.annotations.BeforeClass;
 
 import com.test.constants.Endpoints;
+import com.test.constants.SourcePath;
 import com.test.models.AddUserPojo;
 import com.test.models.DeleteUserPogo;
 import com.test.models.DeserializationPogo;
 import com.test.models.DeserializeGetUserPogo;
 import com.test.models.LoginToApplicationPogo;
 import com.test.models.UpdateUserPojo;
+import com.test.utils.Utils;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -26,7 +28,7 @@ public class UserServiceHelper {
 	static String id;
 	@BeforeClass
 	public String init() {
-		RestAssured.baseURI ="https://us-central1-qa01-tekarch-accmanager.cloudfunctions.net";
+		RestAssured.baseURI =SourcePath.BASE_URI;
 		baseURIInVariable=RestAssured.baseURI;
 		return baseURIInVariable;
 	}
@@ -37,8 +39,8 @@ public class UserServiceHelper {
 	}
 	public static Response LoginToApplication()
 	{
-		String username = "lintu.joseph06@ta.com";
-		String password = "lintu.joseph06@123";
+		String username = Utils.username;
+		String password = Utils.password;
 		LoginToApplicationPogo ob= new LoginToApplicationPogo();
 		ob.setUsername(username);
 		ob.setPassword(password);

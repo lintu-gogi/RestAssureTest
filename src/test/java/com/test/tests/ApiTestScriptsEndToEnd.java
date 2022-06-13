@@ -66,23 +66,8 @@ public class ApiTestScriptsEndToEnd extends UserServiceHelper{
 			Response res  = addUserData();
 			res.then().statusCode(201);
 			//getUsers();
-			/*token1= getToken();
-			AddUserPojo obj=new AddUserPojo();
-			obj.setAccountno("TA-2299889");
-			obj.setDepartmentno("11");
-			obj.setSalary("2000");
-			obj.setPincode("123123");
 			
-			Header header1=new Header("token",token1);
-			Response res=RestAssured.given()
-					.header(header1)
-					.contentType(ContentType.JSON)
-					.body(obj)// serialization
-			.when()
-			.post("https://us-central1-qa01-tekarch-accmanager.cloudfunctions.net/addData");
-			//Student stu=res.as(Student.class);
-			String value=res.jsonPath().get("status");
-			System.out.println("reponse status ="+value);*/
+					
 		}
 		
 		@Test(priority=3,enabled=true)
@@ -92,31 +77,8 @@ public class ApiTestScriptsEndToEnd extends UserServiceHelper{
 			Response res  = updateUserData(userId,id);
 			res.then().statusCode(200);
 			getUsers();
-			/*
-		 	token1= getToken();
-			UpdateUserPojo obj=new UpdateUserPojo();
-			obj.setAccountno(accNo);
-			obj.setDepartmentno("33");
-			obj.setSalary("3333");
-			obj.setPincode(pinCode);
-			obj.setUserid(userId);
-			obj.setId(id);
-			
-			Header header1=new Header("token",token1);
-			Response res=RestAssured.given()
-					.header(header1)
-					.contentType(ContentType.JSON)
-					.body(obj)// serialization
-			.when()
-			.put(Endpoints.UPDATE_DATA);
-			//Student stu=res.as(Student.class);
-			DeserializationPogo obj2 = res.as(DeserializationPogo.class);
-			
-			
-			//String value=res.jsonPath().get("status");
-			System.out.println("reponse status2 ="+obj2.getStatus());
-			//.put("/updateData");*/
-			getUsers();
+		
+		
 			 
 		}
 
@@ -126,22 +88,7 @@ public class ApiTestScriptsEndToEnd extends UserServiceHelper{
 			//getUsers();
 			Response res  = deleteUserData(userId,id);
 			res.then().statusCode(200);
-			/*
-			if(token1==null)
-			token1= getToken();
-			DeleteUserPogo obj= new DeleteUserPogo();
-			obj.setUserid(userId);
-			obj.setId(id);
-			Header header1= new Header("token",token1);
-			Response res= RestAssured.given()
-					.header(header1)
-					.contentType(ContentType.JSON)
-					.body(obj)
-					.when()
-					.delete("https://us-central1-qa01-tekarch-accmanager.cloudfunctions.net/deleteData");
-			res.then().statusCode(200);
-			String statusValue= res.jsonPath().get("status");
-			System.out.println("Response status "+statusValue);*/
+			
 			getUsers();
 		}
 

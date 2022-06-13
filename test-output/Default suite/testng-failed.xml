@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.test.tests.ApiTestScriptsEndToEnd">
+      <class name="com.test.simpleCRUDEoperations.AddUserDataTest">
         <methods>
-          <include name="loginToApi"/>
+          <include name="CreateUser"/>
           <include name="init"/>
-          <include name="DeleteUser"/>
+          <include name="loginToApi"/>
         </methods>
-      </class> <!-- com.test.tests.ApiTestScriptsEndToEnd -->
+      </class> <!-- com.test.simpleCRUDEoperations.AddUserDataTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
